@@ -1,0 +1,18 @@
+To run Python Flask file , there are 2 ways 
+
+1. Write  code and then right click on it and then run on cmd , then we will get * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 546-189-254
+127.0.0.1 - - [30/Mar/2025 21:36:39] "GET / HTTP/1.1" 200 -
+like this , click on url (ctrl + click), we will get o/p
+if you want to run another file, press ctrl + c on terminal then run
+
+2.on terminal , type python filename.py then enter it will run then follow exact same , if there is html css file then first run py file then run html file
+DATABASE NAME : STUDYFLIX
+username: postgres
+password:admin

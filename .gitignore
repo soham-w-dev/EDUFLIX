@@ -1,0 +1,15 @@
+# Virtual environment & cache
+venv/
+__pycache__/
+
+# Environment & editor
+.env
+.vscode/
+
+# Ignore all uploaded media
+/static/uploads/
+/static/video/
+
+# (Optional) ignore all mp4 anywhere
+*.mp4
+# Ignore database file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
