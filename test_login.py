@@ -1,23 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.edge.options import Options
 
 def test_login():
     options = Options()
 
-    # 🔥 Edge binary path (VERY IMPORTANT)
     options.binary_location = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
 
-    # Headless mode
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
-    service = Service(EdgeChromiumDriverManager().install())
+    # 🔥 USE LOCAL DRIVER ONLY
+    service = Service("msedgedriver.exe")
+
     driver = webdriver.Edge(service=service, options=options)
 
     driver.get("http://127.0.0.1:5000/")
