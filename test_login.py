@@ -19,8 +19,8 @@ def test_login():
 
     time.sleep(2)
 
-    driver.find_element(By.NAME, "usernamelogin").send_keys("testuser")
-    driver.find_element(By.NAME, "passwordlogin").send_keys("1234")
+    driver.find_element(By.NAME, "usernamelogin").send_keys("admin")
+    driver.find_element(By.NAME, "passwordlogin").send_keys("admin")
     driver.find_element(By.TAG_NAME, "button").click()
 
     time.sleep(3)
