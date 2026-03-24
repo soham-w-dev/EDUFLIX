@@ -10,11 +10,13 @@ def test_login():
 
     options.binary_location = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
 
+    # 🔥 IMPORTANT FLAGS (THIS FIXES YOUR ERROR)
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--remote-debugging-port=9222")   # ⭐ ADD THIS
+    options.add_argument("--disable-gpu")                  # ⭐ ADD THIS
 
-    # 🔥 USE LOCAL DRIVER ONLY
     service = Service("msedgedriver.exe")
 
     driver = webdriver.Edge(service=service, options=options)
