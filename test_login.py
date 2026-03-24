@@ -25,7 +25,7 @@ def test_login():
 
     time.sleep(3)
 
-    if "home" in driver.current_url.lower():
+    if "search" in driver.current_url.lower():
         print("✅ Login Successful")
         assert True
     else:
