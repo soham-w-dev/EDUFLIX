@@ -22,7 +22,7 @@ def test_login():
 
     # Enter data
     username.send_keys("admin")      # your test username
-    password.send_keys("1234")       # your test password
+    password.send_keys("admin")       # your test password
 
     # Click login button
     login_btn = driver.find_element(By.TAG_NAME, "button")
