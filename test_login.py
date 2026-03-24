@@ -8,12 +8,18 @@ def test_login():
 
     options = Options()
 
-    # Headless (keep this)
+    # ✅ MUST for Jenkins
     options.add_argument("--headless=new")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-infobars")
 
-    # ✅ Use local driver (IMPORTANT FIX)
+    # ✅ IMPORTANT (fix crash)
+    options.add_argument("--user-data-dir=C:/temp/edge-profile")
+
     service = Service("msedgedriver.exe")
 
     driver = webdriver.Edge(service=service, options=options)
