@@ -26,10 +26,10 @@ def test_login():
     time.sleep(3)
 
     if "search" in driver.current_url.lower():
-        print("✅ Login Successful")
+        print("Login Successful")
         assert True
     else:
-        print("❌ Login Failed")
+        print("Login Failed")
         assert False
 
     driver.quit()
