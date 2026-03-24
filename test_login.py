@@ -2,23 +2,21 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import time
 
 def test_login():
 
     options = Options()
 
-    # ✅ VERY IMPORTANT (FIX)
+    # Headless (keep this)
     options.add_argument("--headless=new")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Edge(
-        service=Service(EdgeChromiumDriverManager().install()),
-        options=options
-    )
+    # ✅ Use local driver (IMPORTANT FIX)
+    service = Service("msedgedriver.exe")
+
+    driver = webdriver.Edge(service=service, options=options)
 
     driver.get("http://127.0.0.1:5000/login")
 
@@ -34,7 +32,6 @@ def test_login():
 
     time.sleep(3)
 
-    # ✅ SUCCESS CHECK
     if "home" in driver.current_url.lower():
         print("✅ Login Successful")
         assert True

@@ -5,4 +5,3 @@ werkzeug
 jinja2
 selenium
 pytest
-webdriver-manager
