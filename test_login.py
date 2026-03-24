@@ -1,28 +1,41 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
 import time
 
 def test_login():
-    driver = webdriver.Edge()   # since you use Edge
-    driver.maximize_window()
+
+    # Edge setup
+    options = Options()
+    options.add_argument("--start-maximized")
+
+    driver = webdriver.Edge(options=options)
 
     # Your local Flask app URL
     driver.get("http://127.0.0.1:5000/login")
 
-    # Locate fields (using NAME from your HTML)
+    time.sleep(2)
+
+    # Locate fields (based on your HTML)
     username = driver.find_element(By.NAME, "usernamelogin")
     password = driver.find_element(By.NAME, "passwordlogin")
 
-    # Enter data
+    # Enter credentials
     username.send_keys("admin")
     password.send_keys("admin")
 
-    # Submit form
+    # Click login button
     driver.find_element(By.TAG_NAME, "button").click()
 
     time.sleep(3)
 
-    # Assertion (VERY IMPORTANT)
-    assert "Login" not in driver.page_source   # or check dashboard text
+    # ✅ Check success (IMPORTANT)
+    if "home" in driver.current_url.lower():
+        print("✅ Login Successful")
+        assert True
+    else:
+        print("❌ Login Failed")
+        assert False
 
     driver.quit()
