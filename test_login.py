@@ -15,7 +15,7 @@ def test_login():
 
     driver = webdriver.Chrome(service=service, options=options)
 
-    driver.get("http://127.0.0.1:5000/login")
+    driver.get("http://127.0.0.1:5000/")
 
     time.sleep(2)
 
