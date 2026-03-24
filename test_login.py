@@ -1,38 +1,37 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-import time
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def test_login():
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
 
-    # Launch Browser
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.maximize_window()
 
-    # Open EDUFLIX
-    driver.get("http://127.0.0.1:5000/login")
+    # Your Flask app URL
+    driver.get("http://127.0.0.1:5000/")   # change if needed
 
-    time.sleep(2)
+    wait = WebDriverWait(driver, 10)
 
-    # Locate Elements
-    username = driver.find_element(By.NAME, "username")
-    password = driver.find_element(By.NAME, "password")
-    login_btn = driver.find_element(By.XPATH, "//button[@type='submit']")
+    # Locate fields using NAME (important)
+    username = wait.until(EC.presence_of_element_located((By.NAME, "usernamelogin")))
+    password = driver.find_element(By.NAME, "passwordlogin")
 
-    # Enter Data
-    username.send_keys("testuser")
-    password.send_keys("123456")
+    # Enter data
+    username.send_keys("admin")      # your test username
+    password.send_keys("1234")       # your test password
 
-    # Click Login
+    # Click login button
+    login_btn = driver.find_element(By.TAG_NAME, "button")
     login_btn.click()
 
-    time.sleep(3)
+    # Wait for redirect (since AJAX is used)
+    wait.until(EC.url_changes("http://127.0.0.1:5000/"))
 
-    # Assertion (Very Important – as per PPT) :contentReference[oaicite:3]{index=3}
-    assert "Home" in driver.page_source
-
-    print("Login Test Passed ✅")
+    # Assertion (VERY IMPORTANT)
+    assert "dashboard" in driver.current_url.lower() or "home" in driver.current_url.lower()
 
     driver.quit()
