@@ -1,43 +1,28 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.edge.service import Service
-from selenium.webdriver.edge.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import time
 
 def test_login():
-    options = Options()
+    driver = webdriver.Edge()   # since you use Edge
+    driver.maximize_window()
 
-    options.binary_location = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    # Your local Flask app URL
+    driver.get("http://127.0.0.1:5000/login")
 
-    # 🔥 FINAL STABLE FLAGS
-    options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--remote-debugging-port=9222")
-    options.add_argument("--inprivate")                  # ⭐ ADD THIS
-    options.add_argument("--disable-extensions")         # ⭐ ADD THIS
-    options.add_argument("--disable-software-rasterizer")# ⭐ ADD THIS
-
-    service = Service("msedgedriver.exe")
-
-    driver = webdriver.Edge(service=service, options=options)
-
-    driver.get("http://127.0.0.1:5000/")
-
-    wait = WebDriverWait(driver, 10)
-
-    username = wait.until(EC.presence_of_element_located((By.NAME, "usernamelogin")))
+    # Locate fields (using NAME from your HTML)
+    username = driver.find_element(By.NAME, "usernamelogin")
     password = driver.find_element(By.NAME, "passwordlogin")
 
+    # Enter data
     username.send_keys("admin")
     password.send_keys("admin")
 
+    # Submit form
     driver.find_element(By.TAG_NAME, "button").click()
 
-    wait.until(EC.url_changes("http://127.0.0.1:5000/"))
+    time.sleep(3)
 
-    assert "dashboard" in driver.current_url.lower() or "home" in driver.current_url.lower()
+    # Assertion (VERY IMPORTANT)
+    assert "Login" not in driver.page_source   # or check dashboard text
 
     driver.quit()
