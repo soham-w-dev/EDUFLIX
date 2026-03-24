@@ -31,8 +31,8 @@ def test_login():
     username = driver.find_element(By.NAME, "usernamelogin")
     password = driver.find_element(By.NAME, "passwordlogin")
 
-    username.send_keys("testuser")
-    password.send_keys("1234")
+    username.send_keys("admin")
+    password.send_keys("admin")
 
     driver.find_element(By.TAG_NAME, "button").click()
 
