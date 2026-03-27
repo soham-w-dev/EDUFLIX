@@ -25,11 +25,11 @@ pipeline {
             }
         }
 
-        stage('Wait for DB') {
-            steps {
-                bat 'timeout /t 10'
+            stage('Wait for DB') {
+                steps {
+                    bat 'ping 127.0.0.1 -n 10 > nul'
+                }
             }
-        }
 
         stage('Build Docker Image') {
             steps {
