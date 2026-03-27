@@ -4,14 +4,16 @@ from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask import flash, redirect, url_for
+import time
 import os
 import re
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-
+time.sleep(5)
 # Configure PostgreSQL database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/STUDYFLIX'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@postgres-db:5432/STUDYFLIX'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/STUDYFLIX'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
@@ -585,4 +587,6 @@ if __name__ == "__main__":
     with app.app_context():
         # Create all database tables if they don't exist
         db.create_all()
-    app.run(debug=False)
+#   app.run(debug=False) 
+    app.run(host="0.0.0.0", port=5000, debug=False)
+
