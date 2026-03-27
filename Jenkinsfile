@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/soham-w-dev/EDUFLIX.git'
-            }
-        }
-
         stage('Create Docker Network') {
             steps {
                 bat 'docker network create eduflix-network || exit 0'
