@@ -6,3 +6,4 @@ jinja2
 selenium
 pytest
 psycopg2-binary
+gunicorn
